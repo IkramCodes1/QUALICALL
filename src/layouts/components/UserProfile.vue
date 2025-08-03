@@ -1,15 +1,23 @@
 <script setup>
-import avatar1 from '@images/avatars/avatar-1.png'
 import HTTP from '@/lib/axios'
+import avatar1 from '@images/avatars/avatar-1.png'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+// ... existing code ...
 const logout = async () => {
-  localStorage.removeItem('authToken')
-  await HTTP.post('/logout')
-  router.push('/login')
+  try {
+    const response = await HTTP.post('/logout')
+    if (response.status === 200) {
+      localStorage.removeItem('authToken')
+      router.push('/login')
+    }
+  } catch (error) {
+    console.error(error)
+  }
 }
+// ... existing code ...
 </script>
 
 <template>

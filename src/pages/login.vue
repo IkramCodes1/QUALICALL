@@ -8,7 +8,11 @@ import { useTheme } from 'vuetify'
 
 import HTTP from '@/lib/axios'
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
+
 // ...autres imports
+
+const router = useRouter()
 
 const form = ref({
   email: '',
@@ -32,9 +36,11 @@ const login = async () => {
       email: form.value.email,
       password: form.value.password,
     })
-    const token = response.data
-    localStorage.setItem('authToken', token)
-    window.location.href = '/dashboard'
+    if (response.status === 200) {
+      const token = response.data
+      localStorage.setItem('authToken', token)
+      router.push('/dashboard')
+    }
   } catch (error) {
     if (error.response && error.response.status === 401) {
       errorMessage.value = 'Email ou mot de passe incorrect.'
@@ -45,8 +51,6 @@ const login = async () => {
     }
   }
 }
-
-
 
 const vuetifyTheme = useTheme()
 
