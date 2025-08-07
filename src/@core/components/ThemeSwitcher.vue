@@ -21,7 +21,8 @@ const {
 
 const changeTheme = () => {
   globalTheme.name.value = getNextThemeName()
-  localStorage.setItem('selected-theme', getNextThemeName()) // <-- Ajout ici
+  localStorage.setItem('selected-theme', getNextThemeName()) 
+  window.dispatchEvent(new Event('theme-changed')) 
 
 }
 
@@ -36,7 +37,9 @@ onMounted(() => {
 // Update icon if theme is changed from other sources
 watch(() => globalTheme.name.value, val => {
   currentThemeName.value = val
-  localStorage.setItem('selected-theme', val) // <-- Ajout ici aussi pour couvrir tous les cas
+  localStorage.setItem('selected-theme', val) 
+  window.dispatchEvent(new Event('theme-changed')) 
+
 
 })
 </script>

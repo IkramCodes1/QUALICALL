@@ -8,6 +8,10 @@ export const routes = [
         path: 'dashboard',
         component: () => import('@/pages/dashboard.vue'),
       },
+      {
+        path: 'user',
+        component: () => import('@/views/user/User.vue'),
+      },
     ],
   },
   {

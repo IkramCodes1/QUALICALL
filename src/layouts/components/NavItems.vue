@@ -57,7 +57,7 @@ import VerticalNavLink from '@layouts/components/VerticalNavLink.vue';
     />
   </VerticalNavGroup> -->
 
-   <VerticalNavLink
+  <VerticalNavLink
     :item="{
       title: 'Dashboards',
       icon: 'ri-home-smile-line',
@@ -70,6 +70,14 @@ import VerticalNavLink from '@layouts/components/VerticalNavLink.vue';
   <VerticalNavSectionTitle
     :item="{
       heading: 'Apps & Pages',
+    }"
+  />
+
+  <VerticalNavLink
+    :item="{
+      title: 'User',
+      icon: 'ri-user-line',
+      to: '/user',
     }"
   />
 

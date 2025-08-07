@@ -39,6 +39,10 @@ const login = async () => {
     if (response.status === 200) {
       const token = response.data
       localStorage.setItem('authToken', token)
+      const responseUser = await HTTP.get('/user')
+      if (responseUser.status === 200) {
+        localStorage.setItem('user', JSON.stringify(responseUser.data.user))
+      }
       router.push('/dashboard')
     }
   } catch (error) {

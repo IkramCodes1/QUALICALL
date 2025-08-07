@@ -1,9 +1,20 @@
 <script setup>
 import HTTP from '@/lib/axios'
 import avatar1 from '@images/avatars/avatar-1.png'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+const user = ref({})
+try {
+  const userStr = localStorage.getItem('user')
+  if (userStr) {
+    user.value = JSON.parse(userStr)
+  }
+} catch (e) {
+  user.value = {}
+}
 
 // ... existing code ...
 const logout = async () => {
@@ -11,6 +22,7 @@ const logout = async () => {
     const response = await HTTP.post('/logout')
     if (response.status === 200) {
       localStorage.removeItem('authToken')
+      localStorage.removeItem('user')
       router.push('/login')
     }
   } catch (error) {
@@ -66,9 +78,13 @@ const logout = async () => {
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              <!-- Affichage du nom de l'utilisateur -->
+              {{ user.name }}
             </VListItemTitle>
-            <VListItemSubtitle>Admin</VListItemSubtitle>
+            <VListItemSubtitle>
+              <!-- Affichage du rôle si disponible -->
+              {{ user.role || '' }}
+            </VListItemSubtitle>
           </VListItem>
           <VDivider class="my-2" />
 

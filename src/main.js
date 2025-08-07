@@ -1,14 +1,18 @@
 import App from '@/App.vue'
 import { registerPlugins } from '@core/utils/plugins'
 import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
 
-// Styles
+import '@/assets/styles/styles.scss'
 import '@core/scss/template/index.scss'
 import '@layouts/styles/index.scss'
 
-// Create vue app
+import 'vuetify/styles'
+
 const app = createApp(App)
 
+const vuetify = createVuetify()
+app.use(vuetify)
 
 // Register plugins
 registerPlugins(app)

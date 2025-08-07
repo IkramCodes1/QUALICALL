@@ -1,1 +1,18 @@
-// Write your overrides
+:root {
+  /* Centrer le texte du body */
+  .v-data-table__td {
+    text-align: center !important;
+  }
+
+  /* Enlever le display flex et l'uppercase des headers */
+  .v-data-table-header__content {
+    display: block !important;
+    text-transform: none !important;
+  }
+
+}
+
+
+.snackbar-pre {
+  white-space: pre-line;
+}
