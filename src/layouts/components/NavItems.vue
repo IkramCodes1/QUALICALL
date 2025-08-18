@@ -1,11 +1,15 @@
 <script setup>
 import VerticalNavSectionTitle from '@/@layouts/components/VerticalNavSectionTitle.vue';
 import VerticalNavLink from '@layouts/components/VerticalNavLink.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t} = useI18n()
+
+
 </script>
 
 <template>
-  <!-- 👉 Dashboards -->
-  <!-- <VerticalNavGroup
+    <!-- <VerticalNavGroup
     :item="{
       title: 'Dashboards',
       badgeContent: '5',
@@ -57,29 +61,27 @@ import VerticalNavLink from '@layouts/components/VerticalNavLink.vue';
     />
   </VerticalNavGroup> -->
 
+
+  <!-- 👉 Dashboards -->
   <VerticalNavLink
     :item="{
-      title: 'Dashboards',
+      title: t('dashboards') || 'Dashboards',
       icon: 'ri-home-smile-line',
       to: '/dashboard',
     }"
   />
-
-  <!-- //dadada -->
   <!-- 👉 Apps & Pages -->
   <VerticalNavSectionTitle
     :item="{
-      heading: 'Apps & Pages',
+      heading: t('appsAndPages') || 'Apps & Pages',
     }"
   />
 
   <VerticalNavLink
     :item="{
-      title: 'User',
+      title: t('users') || 'User',
       icon: 'ri-user-line',
       to: '/user',
     }"
   />
-
-
 </template>

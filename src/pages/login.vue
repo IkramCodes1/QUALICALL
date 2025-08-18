@@ -10,6 +10,11 @@ import HTTP from '@/lib/axios'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n()
+
+
 // ...autres imports
 
 const router = useRouter()
@@ -36,12 +41,14 @@ const login = async () => {
       email: form.value.email,
       password: form.value.password,
     })
-    if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
       const token = response.data
       localStorage.setItem('authToken', token)
       const responseUser = await HTTP.get('/user')
-      if (responseUser.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         localStorage.setItem('user', JSON.stringify(responseUser.data.user))
+        const user = JSON.parse(localStorage.getItem('user') || '{}')
+        locale.value = user.langue || 'en'
       }
       router.push('/dashboard')
     }

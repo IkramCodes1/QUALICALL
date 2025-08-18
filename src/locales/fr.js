@@ -1,4 +1,6 @@
 export default {
+    dashboards: 'Tableaux de bord',
+    appsAndPages: 'Applications & Pages',
     users: 'Utilisateurs',
     add: 'Ajouter',
     delete: 'Supprimer',
@@ -15,4 +17,9 @@ export default {
         emailInvalid: 'Email invalide',
         roleRequired: 'Le rôle est requis',
     },
+    confirmDeleteTitle: 'Êtes-vous sûr ?',
+    confirmDeleteText: "Cette action est irréversible !",
+    yesDelete: 'Oui, supprimer !',
+    cancel: 'Annuler',
+    error: 'Erreur',
 }

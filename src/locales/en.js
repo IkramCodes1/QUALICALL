@@ -1,4 +1,6 @@
 export default {
+    dashboards: 'Dashboards',
+    appsAndPages: 'Apps & Pages',
     users: 'Users',
     add: 'Add',
     delete: 'Delete',
@@ -16,4 +18,9 @@ export default {
         emailInvalid: 'Invalid email',
         roleRequired: 'Role is required',
     },
+    confirmDeleteTitle: 'Are you sure?',
+    confirmDeleteText: 'This action is irreversible!',
+    yesDelete: 'Yes, delete!',
+    cancel: 'Cancel',
+    error: 'Error',
 }

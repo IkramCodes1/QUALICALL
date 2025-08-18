@@ -1,8 +1,10 @@
 <script setup>
 import HTTP from '@/lib/axios'
 import avatar1 from '@images/avatars/avatar-1.png'
+import Swal from 'sweetalert2'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+
 
 const router = useRouter()
 
@@ -18,6 +20,53 @@ try {
 
 // ... existing code ...
 const logout = async () => {
+  // Détection de la langue de l'utilisateur
+  let lang = 'fr'
+  try {
+    const userStr = localStorage.getItem('user')
+    if (userStr) {
+      const userObj = JSON.parse(userStr)
+      lang = userObj.langue || 'fr'
+    }
+  } catch (e) {
+    lang = 'fr'
+  }
+
+  // Textes multilingues
+  const texts = {
+    fr: {
+      title: "Êtes-vous sûr de vouloir vous déconnecter ?",
+      text: "Vous serez redirigé vers la page de connexion.",
+      confirm: "Oui, se déconnecter",
+      cancel: "Annuler"
+    },
+    en: {
+      title: "Are you sure you want to log out?",
+      text: "You will be redirected to the login page.",
+      confirm: "Yes, log out",
+      cancel: "Cancel"
+    }
+  }
+  const t = texts[lang] || texts.fr
+
+  // Afficher une confirmation avant de déconnecter
+  if (typeof Swal !== 'undefined') {
+    const result = await Swal.fire({
+      title: t.title,
+      text: t.text,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#9155FD', 
+      cancelButtonColor: '#2196F3',
+      confirmButtonText: `<span style="color: #fff">${t.confirm }</span>`,
+      cancelButtonText: `<span style="color: #fff">${t.cancel}</span>`
+    });
+    if (!result.isConfirmed) return;
+  } else {
+    // fallback si Swal n'est pas disponible
+    if (!window.confirm(t.title)) return;
+  }
+
   try {
     const response = await HTTP.post('/logout')
     if (response.status === 200) {

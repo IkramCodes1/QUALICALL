@@ -108,14 +108,29 @@
       size="48"
     />
   </v-overlay>
+
+  <v-snackbar
+      v-model="snackbar"
+      :color="snackbarColor"
+      timeout="4000"
+      location="top right"
+      variant="elevated"
+    >
+    <span class="snackbar-pre">
+      {{ snackbarMessage }}
+    </span>
+  </v-snackbar>
 </template>
 
 <script setup>
 import HTTP from '@/lib/axios';
+import { getErrorMessage } from '@/utils/errorMessage';
+import Swal from 'sweetalert2';
 import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Add from './action/Add.vue'; // ← AJOUT
 import Update from './action/UpdateUsers.vue';
+
 
 
 const theme = ref(localStorage.getItem('selected-theme') || 'light')
@@ -140,9 +155,9 @@ const selectedUser = ref({
 })
 
 const drawerUpdate = ref(false)
-
-
-
+const snackbar = ref(false)
+const snackbarMessage = ref('')
+const snackbarColor = ref('success') 
 
 onMounted(() => {
   window.addEventListener('theme-changed', updateTheme)
@@ -164,19 +179,41 @@ function addUser() {
 }
 
 async function deleteItem(item) {
-  loading.value = true
-  try {
-    const response = await HTTP.post('user/delete', { id: item.id })
-    if (response.status === 200) {
-      await fetchUsers()
+  const result = await Swal.fire({
+    title: t('confirmDeleteTitle') || 'Êtes-vous sûr ?',
+    text: t('confirmDeleteText') || "Cette action est irréversible !",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#9155FD', 
+    cancelButtonColor: '#2196F3',  
+    confirmButtonText: `<span style="color: #fff">${t('yesDelete') || 'Oui, supprimer !'}</span>`,
+    cancelButtonText: `<span style="color: #fff">${t('cancel') || 'Annuler'}</span>`,
+   
+  });
+
+  if (result.isConfirmed) {
+    loading.value = true;
+    try {
+      const response = await HTTP.post('user/delete', { id: item.id });
+      if (response.status === 200 || response.status === 201) {
+        await fetchUsers();
+        showSnackbar(response.data.message, 'success')
+      } else {
+        showSnackbar(response.data.message, 'error')
+      }
+    } catch (error) {
+      showSnackbar(getErrorMessage(error), 'error')
+    } finally {
+      loading.value = false;
     }
-  } catch (error) {
-    console.error('Erreur lors de la suppression de l\'utilisateur:', error)
-  } finally {
-    loading.value = false
   }
 }
 
+function showSnackbar(message, color = 'success') {
+  snackbarMessage.value = message
+  snackbarColor.value = color
+  snackbar.value = true
+}
 
 async function fetchUsers() {
   loading.value = true
