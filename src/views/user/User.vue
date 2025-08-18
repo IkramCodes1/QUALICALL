@@ -1,30 +1,31 @@
 <template>
   <div class="user-page-header-responsive">
     <h2 class="user-page-title">
-      Utilisateurs
+      {{ $t('users') }} 
       <span v-if="items.length > 0">({{ items.length }})</span>
     </h2>
     <v-btn color="#9155FD" class="add-user-btn-responsive" @click="addUser">
       <i class="ri-add-line"></i>
-      <span class="add-user-btn-text">Ajouter utilisateur</span>
+      <span class="add-user-btn-text">{{ $t('add') }}</span>
     </v-btn>
   </div>
 
 
-  <Add v-model="drawer" :fetch-users="fetchUsers" />
+  <Add v-model="drawerAdd" :fetch-users="fetchUsers" />
+  <Update v-model="drawerUpdate" :fetch-users="fetchUsers" :selected-user="selectedUser" />
   <!-- Mobile version -->
   <div class="user-list-mobile" :class="`theme-${theme}`">
     <div v-for="item in items" :key="item.email" class="user-card-mobile">
       <div class="user-card-row">
-        <span class="user-card-label">Nom :</span>
+        <span class="user-card-label">{{ $t('fullName') }} :</span>
         <span class="user-card-value">{{ item.name }}</span>
       </div>
       <div class="user-card-row">
-        <span class="user-card-label">Email :</span>
+        <span class="user-card-label">{{ $t('email') }} :</span>
         <a class="user-card-value" :href="`mailto:${item.email}`">{{ item.email }}</a>
       </div>
       <div class="user-card-row">
-        <span class="user-card-label">Rôle :</span>
+        <span class="user-card-label">{{ $t('role') }} :</span>
         <span class="user-card-value">{{ item.role }}</span>
       </div>
       <div class="user-card-actions">
@@ -51,7 +52,9 @@
   >
     <!-- ... existing slots ... -->
     <template #no-data>
-      <div class="no-users" v-if="!loading">Aucun utilisateur n’a été inséré</div>
+      <div class="no-users" v-if="!loading">
+        {{ $t('noData') }} 
+      </div>
     </template>
     <template #item.name="{ item }">
       <span style=" font-weight: bold;">{{ item.name }}</span>
@@ -72,17 +75,19 @@
         <v-list class="menu-action-list">
           <v-list-item @click="editItem(item)">
             <v-list-item-title>
-              <i class="ri-add-line"></i> Modifier
+              <i class="ri-pencil-line"></i> <span class="ml-2">{{ $t('edit') }}</span>
             </v-list-item-title>
           </v-list-item>
           <v-list-item @click="deleteItem(item)">
             <v-list-item-title>
-              <i class="ri-delete-bin-5-line"></i> Supprimer
+              <i class="ri-delete-bin-5-line"></i> <span class="ml-2">{{ $t('delete') }}</span>
             </v-list-item-title>
           </v-list-item>
           <v-list-item @click="regenerateItem(item)">
             <v-list-item-title>
-              <i class="ri-refresh-line"></i> Régénérer
+              <i class="ri-refresh-line">
+              </i> 
+              <span class="ml-2">{{ $t('regenerate') }}</span>
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -107,21 +112,35 @@
 
 <script setup>
 import HTTP from '@/lib/axios';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Add from './action/Add.vue'; // ← AJOUT
+import Update from './action/UpdateUsers.vue';
+
 
 const theme = ref(localStorage.getItem('selected-theme') || 'light')
+const { t } = useI18n()
 
-const headers = [
-  { title: 'Nom complet', value: 'name' },
-  { title: 'Email', value: 'email' },
-  { title: 'Rôle', value: 'role' },
-  { title: 'Action', value: 'action' },
-]
+const headers = computed(() => [
+  { title: t('fullName'), value: 'name' },
+  { title: t('email'), value: 'email' },
+  { title: t('role'), value: 'role' },
+  { title: t('action'), value: 'action' },
+])
 const items = ref([])
 const loading = ref(false)
 
-const drawer = ref(false)
+const drawerAdd = ref(false)
+const selectedUser = ref({
+  id: '',
+  name: '',
+  email: '',
+  role: '',
+  role_id: '',
+})
+
+const drawerUpdate = ref(false)
+
 
 
 
@@ -141,7 +160,21 @@ function updateTheme() {
 }
 
 function addUser() {
-  drawer.value = true
+  drawerAdd.value = true
+}
+
+async function deleteItem(item) {
+  loading.value = true
+  try {
+    const response = await HTTP.post('user/delete', { id: item.id })
+    if (response.status === 200) {
+      await fetchUsers()
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression de l\'utilisateur:', error)
+  } finally {
+    loading.value = false
+  }
 }
 
 
@@ -161,7 +194,8 @@ async function fetchUsers() {
 }
 
 function editItem(item) {
-  
+  drawerUpdate.value = true
+  selectedUser.value = item
 }
 
 function regenerateItem(item) {

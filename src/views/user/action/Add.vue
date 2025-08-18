@@ -10,7 +10,7 @@
       class="add-user-sidebar"
     >
       <div class="sidebar-header">
-        <span class="sidebar-title">Ajouter un utilisateur</span>
+        <span class="sidebar-title">{{ $t('add') }}</span>
         <v-btn @click="drawer = false" size="small" variant="text" icon>
           <i class="ri-close-line"></i>
         </v-btn>
@@ -18,15 +18,20 @@
       <v-form @submit.prevent="submitAddUser" ref="addUserForm" class="sidebar-form">
         <v-text-field
           v-model="newUser.name"
-          label="Nom complet"
-          :rules="[v => !!v || 'Le nom est requis']"
+          :label=" $t('fullName') "
+          :rules="[
+            v => !!v || $t('validation.fullNameRequired')
+          ]"
           required
           class="mb-3"
         />
         <v-text-field
           v-model="newUser.email"
-          label="Email"
-          :rules="[v => !!v || 'L\'email est requis', v => /.+@.+\..+/.test(v) || 'Email invalide']"
+          :label=" $t('email') "
+          :rules="[
+            v => !!v || $t('validation.emailRequired'),
+            v => /.+@.+\..+/.test(v) || $t('validation.emailInvalid')
+          ]"
           required
           class="mb-3"
         />
@@ -35,8 +40,10 @@
           :items="roleOptions"
           item-value="value"
           item-title="text"
-          label="Rôle"
-          :rules="[v => !!v || 'Le rôle est requis']"
+          :label=" $t('role') "
+          :rules="[
+            v => !!v || $t('validation.roleRequired')
+          ]"
           required
           class="mb-4"
         />
