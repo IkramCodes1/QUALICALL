@@ -12,7 +12,7 @@ import { useRouter } from 'vue-router'
 
 
 import { useI18n } from 'vue-i18n'
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 
 
 // ...autres imports
@@ -32,7 +32,7 @@ const login = async () => {
   errorMessage.value = ''
 
   if (!form.value.email || !form.value.password) {
-    errorMessage.value = 'Veuillez remplir tous les champs.'
+    errorMessage.value = t('fillAllFields')
     return
   }
 
@@ -54,11 +54,11 @@ const login = async () => {
     }
   } catch (error) {
     if (error.response && error.response.status === 401) {
-      errorMessage.value = 'Email ou mot de passe incorrect.'
+      errorMessage.value = t('invalidCredentials')
     } else if (error.response && error.response.status === 422) {
-      errorMessage.value = 'Format de l’email ou du mot de passe invalide.'
+      errorMessage.value = t('invalidFormat')
     } else {
-      errorMessage.value = 'Erreur de connexion. Veuillez réessayer.'
+      errorMessage.value = t('connectionError')
     }
   }
 }
@@ -97,10 +97,11 @@ const authThemeMask = computed(() => {
 
       <VCardText class="pt-2">
         <h4 class="text-h4 mb-1">
-          Bienvenue sur Materio ! 👋🏻
+          {{ t('welcome') }}
+
         </h4>
         <p class="mb-0">
-          Veuillez vous connecter à votre compte pour commencer l'aventure
+          {{ t('loginMessage') }}
         </p>
       </VCardText>
 
@@ -114,7 +115,7 @@ const authThemeMask = computed(() => {
             <VCol cols="12">
               <VTextField
                 v-model="form.email"
-                label="Email"
+                :label="t('email')"
                 type="email"
               />
             </VCol>
@@ -123,7 +124,7 @@ const authThemeMask = computed(() => {
             <VCol cols="12">
               <VTextField
                 v-model="form.password"
-                label="Mot de passe"
+                :label="t('password')"
                 placeholder="············"
                 :type="isPasswordVisible ? 'text' : 'password'"
                 autocomplete="password"
@@ -140,7 +141,7 @@ const authThemeMask = computed(() => {
                     class="text-primary"
                     href="javascript:void(0)"
                   >
-                    Mot de passe oublié ?
+                    {{ t('forgotPassword') }}
                   </a>
                 </div>
               </div>
@@ -150,7 +151,7 @@ const authThemeMask = computed(() => {
                 block
                 type="submit"
               >
-                Connecter
+                {{ t('login') }}
               </VBtn>
             </VCol>
 

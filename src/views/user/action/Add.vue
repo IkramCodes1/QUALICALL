@@ -72,9 +72,9 @@
 
 
 <script setup>
-import HTTP from '@/lib/axios'
-import { getErrorMessage } from '@/utils/errorMessage'
-import { defineEmits, defineProps, ref, watch } from 'vue'
+import HTTP from '@/lib/axios';
+import { showError } from '@/utils/errorMessageSwal';
+import { defineEmits, defineProps, ref, watch } from 'vue';
 
 const props = defineProps({
   modelValue: Boolean,
@@ -134,7 +134,7 @@ async function submitAddUser() {
       showSnackbar(response.data.message, 'success')
     }
   } catch (error) {
-    showSnackbar(getErrorMessage(error), 'error')
+    showError(error)
   } finally {
     addUserLoading.value = false
   }

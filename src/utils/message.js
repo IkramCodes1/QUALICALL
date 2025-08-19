@@ -1,4 +1,4 @@
-export function getErrorMessage(error) {
+export function getMessage(error) {
   if (error.response && error.response.data && error.response.data.message) {
     const msg = error.response.data.message
     if (typeof msg === 'string') {

@@ -1,4 +1,5 @@
 // src/lib/axios.js
+import { router } from '@/plugins/router'
 import axios from 'axios'
 
 const HTTP = axios.create({
@@ -26,7 +27,10 @@ HTTP.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.removeItem('authToken') 
       localStorage.removeItem('user')
-      window.location.href = '/login'
+      // Utiliser router pour la redirection sans rechargement de page
+      if (router && typeof router.push === 'function' && router.currentRoute.value.path !== '/login') {
+        router.push('/login')
+      }
     }
     return Promise.reject(error)
   }

@@ -124,12 +124,12 @@
 
 <script setup>
 import HTTP from '@/lib/axios';
-import { getErrorMessage } from '@/utils/errorMessage';
+import { showError } from '@/utils/errorMessageSwal';
 import Swal from 'sweetalert2';
 import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Add from './action/Add.vue'; // ← AJOUT
-import Update from './action/UpdateUsers.vue';
+import Update from './action/Edit.vue';
 
 
 
@@ -202,7 +202,7 @@ async function deleteItem(item) {
         showSnackbar(response.data.message, 'error')
       }
     } catch (error) {
-      showSnackbar(getErrorMessage(error), 'error')
+      showError(error)
     } finally {
       loading.value = false;
     }
@@ -224,7 +224,7 @@ async function fetchUsers() {
     }
   } catch (error) {
     console.error('Erreur lors de la récupération des utilisateurs:', error)
-    return null
+    showError(error)
   } finally {
     loading.value = false
   }

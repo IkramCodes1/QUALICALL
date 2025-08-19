@@ -23,4 +23,15 @@ export default {
     yesDelete: 'Yes, delete!',
     cancel: 'Cancel',
     error: 'Error',
+    welcome: "Welcome to Materio! 👋🏻",
+    loginMessage: "Please log in to your account to get started",
+    email: "Email",
+    password: "Password",
+    forgotPassword: "Forgot password?",
+    login: "Login",
+    fillAllFields: "Please fill in all fields.",
+    invalidCredentials: "Incorrect email or password.",
+    invalidFormat: "Invalid email or password format.",
+    connectionError: "Connection error. Please try again.",
+
 }
