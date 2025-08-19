@@ -8,6 +8,8 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const loading = ref(false)
+
 const user = ref({})
 try {
   const userStr = localStorage.getItem('user')
@@ -63,25 +65,40 @@ const logout = async () => {
     });
     if (!result.isConfirmed) return;
   } else {
-    // fallback si Swal n'est pas disponible
     if (!window.confirm(t.title)) return;
   }
 
   try {
+    loading.value = true
     const response = await HTTP.post('/logout')
     if (response.status === 200) {
       localStorage.removeItem('authToken')
       localStorage.removeItem('user')
+      loading.value = false
       router.push('/login')
     }
   } catch (error) {
+    loading.value = false
     console.error(error)
   }
 }
-// ... existing code ...
 </script>
 
 <template>
+  <v-overlay
+    :model-value="loading"
+    opacity="0.2"
+    persistent
+    contained
+    class="d-flex align-center justify-center"
+  >
+    <v-progress-circular
+      indeterminate
+      color="primary"
+      size="48"
+    />
+  </v-overlay>
+
   <VBadge
     dot
     location="bottom right"
