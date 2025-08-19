@@ -7,6 +7,7 @@ import authV1Tree from '@images/pages/auth-v1-tree.png'
 import { useTheme } from 'vuetify'
 
 import HTTP from '@/lib/axios'
+import { showError } from '@/utils/errorMessageSwal'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -26,26 +27,26 @@ const form = ref({
 
 const isPasswordVisible = ref(false)
 
+const isLoading = ref(false)
 const errorMessage = ref('')
 
 const login = async () => {
-  errorMessage.value = ''
-
   if (!form.value.email || !form.value.password) {
-    errorMessage.value = t('fillAllFields')
+    errorMessage.value = t('validation.fillAllFields')
     return
   }
 
+  isLoading.value = true
   try {
     const response = await HTTP.post('/login', {
       email: form.value.email,
       password: form.value.password,
     })
-      if (response.status === 200 || response.status === 201) {
+    if (response.status === 200 || response.status === 201) {
       const token = response.data
       localStorage.setItem('authToken', token)
       const responseUser = await HTTP.get('/user')
-      if (response.status === 200 || response.status === 201) {
+      if (responseUser.status === 200 || responseUser.status === 201) {
         localStorage.setItem('user', JSON.stringify(responseUser.data.user))
         const user = JSON.parse(localStorage.getItem('user') || '{}')
         locale.value = user.langue || 'en'
@@ -53,13 +54,32 @@ const login = async () => {
       router.push('/dashboard')
     }
   } catch (error) {
-    if (error.response && error.response.status === 401) {
-      errorMessage.value = t('invalidCredentials')
-    } else if (error.response && error.response.status === 422) {
-      errorMessage.value = t('invalidFormat')
-    } else {
-      errorMessage.value = t('connectionError')
+    let icon = 'error'
+    let title = t('error')
+
+    if (error?.response) {
+      const status = error.response.status
+
+      // Mot de passe incorrect
+      if (status === 401) {
+        icon = 'warning'
+        title = t('incorrectPasswordTitle') 
+      }
+      // Utilisateur non trouvé
+      else if (status === 404) {
+        icon = 'warning'
+        title = t('userNotFoundTitle') 
+      }
+      // Compte bloqué
+      else if (status === 403) {
+        icon = 'error'
+        title = t('accountBlockedTitle') 
+      }     
     }
+
+    showError(error, icon, title)
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -98,7 +118,6 @@ const authThemeMask = computed(() => {
       <VCardText class="pt-2">
         <h4 class="text-h4 mb-1">
           {{ t('welcome') }}
-
         </h4>
         <p class="mb-0">
           {{ t('loginMessage') }}
@@ -106,8 +125,17 @@ const authThemeMask = computed(() => {
       </VCardText>
 
       <VCardText>
-        <div v-if="errorMessage" class="text-error mb-2" style="color: red;">
-          {{ errorMessage }}
+        <!-- Error message -->
+        <div v-if="errorMessage" class="mb-4">
+          <VAlert
+            type="error"
+            variant="tonal"
+            border="start"
+            prominent
+            class="pa-2"
+          >
+            {{ errorMessage }}
+          </VAlert>
         </div>
         <VForm @submit.prevent="login">
           <VRow>
@@ -117,6 +145,7 @@ const authThemeMask = computed(() => {
                 v-model="form.email"
                 :label="t('email')"
                 type="email"
+                :disabled="isLoading"
               />
             </VCol>
 
@@ -130,12 +159,11 @@ const authThemeMask = computed(() => {
                 autocomplete="password"
                 :append-inner-icon="isPasswordVisible ? 'ri-eye-off-line' : 'ri-eye-line'"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
+                :disabled="isLoading"
               />
 
               <!-- remember me checkbox -->
               <div class="d-flex align-center justify-space-between flex-wrap my-6">
-              
-
                 <div class="d-flex justify-end" style="width: 100%;">
                   <a
                     class="text-primary"
@@ -150,12 +178,12 @@ const authThemeMask = computed(() => {
               <VBtn
                 block
                 type="submit"
+                :loading="isLoading"
+                :disabled="isLoading"
               >
                 {{ t('login') }}
               </VBtn>
             </VCol>
-
-           
           </VRow>
         </VForm>
       </VCardText>
