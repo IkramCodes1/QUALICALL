@@ -12,6 +12,10 @@ export const routes = [
         path: 'user',
         component: () => import('@/views/user/User.vue'),
       },
+      {
+        path: 'audio',
+        component: () => import('@/views/audio/Audio.vue'),
+      },
     ],
   },
   {
