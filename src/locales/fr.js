@@ -1,6 +1,7 @@
 export default {
     dashboards: 'Tableaux de bord',
     appsAndPages: 'Applications & Pages',
+    category:'Categorié',
     users: 'Utilisateurs',
     add: 'Ajouter',
     delete: 'Supprimer',

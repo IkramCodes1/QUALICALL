@@ -16,6 +16,10 @@ export const routes = [
         path: 'audio',
         component: () => import('@/views/audio/Audio.vue'),
       },
+      {
+        path: 'category',
+        component: () => import('@/views/category/category.vue'),
+      },
     ],
   },
   {

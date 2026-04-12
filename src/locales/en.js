@@ -1,6 +1,7 @@
 export default {
     dashboards: 'Dashboards',
     appsAndPages: 'Apps & Pages',
+    category:'Category',
     users: 'Users',
     add: 'Add',
     delete: 'Delete',

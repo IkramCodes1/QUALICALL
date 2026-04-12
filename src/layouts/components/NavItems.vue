@@ -84,4 +84,12 @@ const { t} = useI18n()
       to: '/user',
     }"
   />
+
+  <VerticalNavLink
+    :item="{
+      title: t('category') || 'category',
+      icon: 'ri-layout-grid-fill',
+      to: '/category',
+    }"
+  />
 </template>
