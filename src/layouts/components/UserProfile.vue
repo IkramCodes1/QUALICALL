@@ -4,6 +4,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
 import Swal from 'sweetalert2'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import LanguageSwitcher from '@/layouts/components/LanguageSwitcher.vue'
 
 
 const router = useRouter()
@@ -154,34 +155,11 @@ const logout = async () => {
           </VListItem>
           <VDivider class="my-2" />
 
-          <!-- 👉 Profile -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="ri-user-line"
-                size="22"
-              />
-            </template>
+          
 
-            <VListItemTitle>Profile</VListItemTitle>
-          </VListItem>
+          
 
-          <!-- 👉 Settings -->
-          <VListItem link>
-            <template #prepend>
-              <VIcon
-                class="me-2"
-                icon="ri-settings-4-line"
-                size="22"
-              />
-            </template>
-
-            <VListItemTitle>Settings</VListItemTitle>
-          </VListItem>
-
-          <!-- Divider -->
-          <VDivider class="my-2" />
+          
 
           <!-- 👉 Logout -->
           <VListItem @click="logout" style="cursor:pointer;">

@@ -7,6 +7,12 @@ import authV1MaskLight from '@images/pages/auth-v1-mask-light.png'
 import authV1Tree2 from '@images/pages/auth-v1-tree-2.png'
 import authV1Tree from '@images/pages/auth-v1-tree.png'
 
+import axios from 'axios'
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 const form = ref({
   username: '',
   email: '',
@@ -21,6 +27,34 @@ const authThemeMask = computed(() => {
 })
 
 const isPasswordVisible = ref(false)
+
+const register = async () => {
+  try {
+    // ✅ check terms
+    if (!form.value.privacyPolicies) {
+      alert('You must accept terms')
+      return
+    }
+
+    const res = await axios.post('http://127.0.0.1:8000/api/register', {
+      username: form.value.username,
+      email: form.value.email,
+      password: form.value.password,
+    })
+
+    const token = res.data.token
+
+    // ✅ save token
+    localStorage.setItem('token', token)
+
+    // ✅ redirect
+    router.push('/')
+
+  } catch (err) {
+    console.log(err.response?.data)
+    alert('Error in register')
+  }
+}
 </script>
 
 <template>
@@ -42,7 +76,7 @@ const isPasswordVisible = ref(false)
             v-html="logo"
           />
           <h2 class="font-weight-medium text-2xl text-uppercase">
-            Materio
+            QUALICALL
           </h2>
         </RouterLink>
       </VCardItem>
@@ -57,7 +91,7 @@ const isPasswordVisible = ref(false)
       </VCardText>
 
       <VCardText>
-        <VForm @submit.prevent="() => {}">
+        <VForm @submit.prevent="register">
           <VRow>
             <!-- Username -->
             <VCol cols="12">
@@ -109,7 +143,7 @@ const isPasswordVisible = ref(false)
               <VBtn
                 block
                 type="submit"
-                to="/"
+                
               >
                 Sign up
               </VBtn>

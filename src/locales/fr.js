@@ -27,7 +27,7 @@ export default {
     incorrectPasswordTitle: 'Mot de passe incorrect',
     userNotFoundTitle: 'Utilisateur non trouvé',
     accountBlockedTitle: 'Compte bloqué',
-    welcome: "Bienvenue sur Materio ! 👋🏻",
+    welcome: "Bienvenue sur QualiCall ! 👋🏻",
     loginMessage: "Veuillez vous connecter à votre compte pour commencer l'aventure",
     email: "Email",
     password: "Mot de passe",
@@ -37,4 +37,20 @@ export default {
     invalidCredentials: "Email ou mot de passe incorrect.",
     invalidFormat: "Format de l’email ou du mot de passe invalide.",
     connectionError: "Erreur de connexion. Veuillez réessayer.",
+    registerNow: "S’inscrire maintenant",
+    search:"Recherche",
+    conversation:"conversation",
+    upload:"téléverser audio",
+    upAudio:"Ajouter un audio",
+    clique:"Cliquez ou glissez-déposez",
+    Cancel:"Annuler",
+    Save:"Enregistrer",
+    uploadSuccess:"Upload réussi",
+    generateAiAnalis:'Générer une analyse IA',
+    GeneralSummary: 'Resume Générale',
+    SequenceSummary: 'Séquence Resume',
+    AiEval:'Évaluation de l IA',
+
+
+
 }

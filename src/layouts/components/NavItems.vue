@@ -62,7 +62,8 @@ const { t} = useI18n()
   </VerticalNavGroup> -->
 
 
-  <!-- 👉 Dashboards -->
+  <!-- 👉 Dashboards
+
   <VerticalNavLink
     :item="{
       title: t('dashboards') || 'Dashboards',
@@ -70,6 +71,7 @@ const { t} = useI18n()
       to: '/dashboard',
     }"
   />
+   -->
   <!-- 👉 Apps & Pages -->
   <VerticalNavSectionTitle
     :item="{
@@ -84,7 +86,7 @@ const { t} = useI18n()
       to: '/user',
     }"
   />
-
+ <!--
   <VerticalNavLink
     :item="{
       title: t('category') || 'category',
@@ -92,4 +94,29 @@ const { t} = useI18n()
       to: '/category',
     }"
   />
+   -->
+  <VerticalNavLink
+    :item="{
+      title: t('conversation') || 'conversation',
+      icon: 'ri-discuss-fill',
+      to: '/conversation',
+    }"
+  />
+  <!--
+  <VerticalNavLink
+    :item="{
+      title: t('upload') || 'upload',
+      icon: 'ri-upload-2-line',
+      to: '/upload',
+    }"
+  /> -->
+  <!--
+  <VerticalNavLink
+    :item="{
+      title: t('ai') || 'ai',
+      icon: 'ri-robot-2-line',
+      to: '/ai',
+    }"
+  />
+-->
 </template>

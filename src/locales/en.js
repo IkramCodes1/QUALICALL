@@ -27,7 +27,7 @@ export default {
     incorrectPasswordTitle: 'Incorrect password',
     userNotFoundTitle: 'User not found',
     accountBlockedTitle: 'Account blocked',
-    welcome: "Welcome to Materio! 👋🏻",
+    welcome: "Welcome to QualiCall! 👋🏻",
     loginMessage: "Please log in to your account to get started",
     email: "Email",
     password: "Password",
@@ -37,5 +37,19 @@ export default {
     invalidCredentials: "Incorrect email or password.",
     invalidFormat: "Invalid email or password format.",
     connectionError: "Connection error. Please try again.",
+    registerNow: "Register now",
+    search:"search",
+    conversation:"conversation",
+    upload:"upload audio",
+    upAudio:"add audio",
+    clique:"Click or drag and drop",
+    Cancel:"Cancel",
+    Save:"Save",
+    uploadSuccess:"Upload successful",
+    generateAiAnalis:'Generate AI Analysis',
+    GeneralSummary: 'General Summary',
+    SequenceSummary : 'Sequence Summary',
+    AiEval : 'Ai Evaluation',
+    
 
 }
