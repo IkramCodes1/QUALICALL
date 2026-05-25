@@ -53,8 +53,8 @@ importers:
         specifier: 11.0.5
         version: 11.0.5(vue@3.5.13(typescript@5.7.2))
       vue-i18n:
-        specifier: ^12.0.0-alpha.3
-        version: 12.0.0-alpha.4(vue@3.5.13(typescript@5.7.2))
+        specifier: ^9.14.1
+        version: 9.14.5(vue@3.5.13(typescript@5.7.2))
       vue-prism-component:
         specifier: ^2.0.0
         version: 2.0.0
@@ -693,23 +693,17 @@ packages:
     peerDependencies:
       vue: '>=3'
 
-  '@intlify/core-base@12.0.0-alpha.4':
-    resolution: {integrity: sha512-7JZiWLP9ScL/DDgT6+t1HebP4IqiA0FmHkd7M17LgjchPdIxWCBJFbFANK9bYAj+ZyzR8urtPK65FxyARjPi3A==}
-    engines: {node: '>= 22'}
+  '@intlify/core-base@9.14.5':
+    resolution: {integrity: sha512-5ah5FqZG4pOoHjkvs8mjtv+gPKYU0zCISaYNjBNNqYiaITxW8ZtVih3GS/oTOqN8d9/mDLyrjD46GBApNxmlsA==}
+    engines: {node: '>= 16'}
 
-  '@intlify/message-compiler@12.0.0-alpha.4':
-    resolution: {integrity: sha512-F4yHuJzI2ZXtXTW2B1VhuNULAOjR5bniFSC/Z0rLWRYPO43pVgKLu+FPDoJq13OjTFq4X5hx2s855M4gqPU/pA==}
-    engines: {node: '>= 22'}
+  '@intlify/message-compiler@9.14.5':
+    resolution: {integrity: sha512-IHzgEu61/YIpQV5Pc3aRWScDcnFKWvQA9kigcINcCBXN8mbW+vk9SK+lDxA6STzKQsVJxUPg9ACC52pKKo3SVQ==}
+    engines: {node: '>= 16'}
 
-  '@intlify/shared@12.0.0-alpha.4':
-    resolution: {integrity: sha512-MfunEN3/yQjD1Q9HnD4Qtvg/qLYnR+tK3mEz/EEvikJO+Hu8ICe7Rqh6uusLSjpWy6ECVt2p5HGXlYA12UBweA==}
-    engines: {node: '>= 22'}
-
-  '@intlify/vue-i18n-core@12.0.0-alpha.4':
-    resolution: {integrity: sha512-pQuMjLsUopwyPnWkv+HfOqFSv2leG78hgtihRba26N1GAs13yIGetHYkZSoEIjnAHmpCO1k5588F5WQVZUCMQg==}
-    engines: {node: '>= 22'}
-    peerDependencies:
-      vue: ^3.0.0
+  '@intlify/shared@9.14.5':
+    resolution: {integrity: sha512-9gB+E53BYuAEMhbCAxVgG38EZrk59sxBtv3jSizNL2hEWlgjBjAw1AwpLHtNaeda12pe6W20OGEa0TwuMSRbyQ==}
+    engines: {node: '>= 16'}
 
   '@jridgewell/gen-mapping@0.3.8':
     resolution: {integrity: sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==}
@@ -3192,9 +3186,10 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
-  vue-i18n@12.0.0-alpha.4:
-    resolution: {integrity: sha512-qkIvoGxgA5lFKx3vb8l7R0FXw2B4zxUFi/AlnqBGOHq9E0Ik4FxNXbb0YtNyHjvn/dMSZACbDJcJRHkKdZFJVg==}
-    engines: {node: '>= 22'}
+  vue-i18n@9.14.5:
+    resolution: {integrity: sha512-0jQ9Em3ymWngyiIkj0+c/k7WgaPO+TNzjKSNq9BvBQaKJECqn9cd9fL4tkDhB5G1QBskGl9YxxbDAhgbFtpe2g==}
+    engines: {node: '>= 16'}
+    deprecated: v9 and v10 no longer supported. please migrate to v11. about maintenance status, see https://vue-i18n.intlify.dev/guide/maintenance.html
     peerDependencies:
       vue: ^3.0.0
 
@@ -3815,24 +3810,17 @@ snapshots:
       '@iconify/types': 2.0.0
       vue: 3.5.13(typescript@5.7.2)
 
-  '@intlify/core-base@12.0.0-alpha.4':
+  '@intlify/core-base@9.14.5':
     dependencies:
-      '@intlify/message-compiler': 12.0.0-alpha.4
-      '@intlify/shared': 12.0.0-alpha.4
+      '@intlify/message-compiler': 9.14.5
+      '@intlify/shared': 9.14.5
 
-  '@intlify/message-compiler@12.0.0-alpha.4':
+  '@intlify/message-compiler@9.14.5':
     dependencies:
-      '@intlify/shared': 12.0.0-alpha.4
+      '@intlify/shared': 9.14.5
       source-map-js: 1.2.1
 
-  '@intlify/shared@12.0.0-alpha.4': {}
-
-  '@intlify/vue-i18n-core@12.0.0-alpha.4(vue@3.5.13(typescript@5.7.2))':
-    dependencies:
-      '@intlify/core-base': 12.0.0-alpha.4
-      '@intlify/shared': 12.0.0-alpha.4
-      '@vue/devtools-api': 6.6.4
-      vue: 3.5.13(typescript@5.7.2)
+  '@intlify/shared@9.14.5': {}
 
   '@jridgewell/gen-mapping@0.3.8':
     dependencies:
@@ -6728,10 +6716,10 @@ snapshots:
       flatpickr: 4.6.13
       vue: 3.5.13(typescript@5.7.2)
 
-  vue-i18n@12.0.0-alpha.4(vue@3.5.13(typescript@5.7.2)):
+  vue-i18n@9.14.5(vue@3.5.13(typescript@5.7.2)):
     dependencies:
-      '@intlify/core-base': 12.0.0-alpha.4
-      '@intlify/vue-i18n-core': 12.0.0-alpha.4(vue@3.5.13(typescript@5.7.2))
+      '@intlify/core-base': 9.14.5
+      '@intlify/shared': 9.14.5
       '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.7.2)
 
