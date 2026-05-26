@@ -18,9 +18,18 @@ const messages = {
   en,
 }
 
-const user = JSON.parse(localStorage.getItem('user') || '{}')
+let user = {}
+
+try {
+  user = JSON.parse(localStorage.getItem('user') || '{}')
+} catch (e) {
+  localStorage.removeItem('user')
+}
+
 const userLang = user.langue || 'en'
+
 const i18n = createI18n({
+  legacy: false,
   locale: userLang,
   fallbackLocale: 'en',
   messages,

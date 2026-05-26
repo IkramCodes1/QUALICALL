@@ -49,7 +49,13 @@ const login = async () => { // Fonction exécutée quand on clique sur Login.
       const responseUser = await HTTP.get('/user')
       if (responseUser.status === 200 || responseUser.status === 201) {
         localStorage.setItem('user', JSON.stringify(responseUser.data.user)) // sert à enregistrer les informations de l’utilisateur dans le navigateur.
-        const user = JSON.parse(localStorage.getItem('user') || '{}')
+        let user = {}
+
+        try {
+          user = JSON.parse(localStorage.getItem('user') || '{}')
+        } catch (e) {
+          localStorage.removeItem('user')
+        }
         locale.value = user.langue || 'en' // si user.langue existe si non en mt englais
       }
       router.push('/conversation') // Redirection vers dashboard
