@@ -1,35 +1,80 @@
-# vue
+# 🤖 QUALICALL
 
-This template should help get you started developing with Vue 3 in Vite.
+### AI-Powered Call Analysis and Evaluation Platform
 
-## Recommended IDE Setup
+QUALICALL is an intelligent platform designed to analyze and evaluate call-center conversations using Artificial Intelligence.
 
-[VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur).
+The platform allows users to upload audio conversations, transcribe them, analyze their content, generate summaries, and evaluate the quality of the conversation.
 
-## Type Support for `.vue` Imports in TS
+---
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates.
+## 📸 Project Preview
 
-However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can run `Volar: Switch TS Plugin on/off` from VS Code command palette.
+### Dashboard
 
-## Customize configuration
+![QUALICALL Dashboard](docs/images/dashboard.png)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### Audio Upload
 
-## Project Setup
+![Audio Upload](docs/images/upload.png)
 
-```sh
-npm install
-```
+### Conversation Transcription
 
-### Compile and Hot-Reload for Development
+![Transcription](docs/images/transcription.png)
 
-```sh
-npm run dev
-```
+### AI Evaluation
 
-### Type-Check, Compile and Minify for Production
+![AI Evaluation](docs/images/evaluation.png)
 
-```sh
-npm run build
-```
+---
+
+## 🎥 Demo
+
+▶️ **Watch the project demonstration**
+
+[🎬 QUALICALL Demo](docs/demo/qualicall-demo.mp4)
+
+---
+
+## ✨ Main Features
+
+- 🎙️ Upload call recordings
+- 📝 Automatic speech-to-text transcription
+- 🤖 AI-powered conversation analysis
+- 📊 Conversation quality evaluation
+- 🧠 AI-generated summaries
+- 🔎 Identification of conversation topics
+- 📈 Quality scoring
+- 🌍 Multilingual interface
+- 🔐 Authentication and authorization
+- 👥 User and agent management
+
+---
+
+## 🏗️ Project Architecture
+
+```text
+                    ┌─────────────────┐
+                    │   Vue.js Client │
+                    │    Vuetify UI   │
+                    └────────┬────────┘
+                             │
+                             │ REST API
+                             ▼
+                    ┌─────────────────┐
+                    │ Laravel Backend │
+                    │   Sanctum Auth  │
+                    └────────┬────────┘
+                             │
+                    ┌────────┴────────┐
+                    │                 │
+                    ▼                 ▼
+             ┌─────────────┐   ┌─────────────┐
+             │   MySQL     │   │  FastAPI    │
+             │  Database   │   │ AI Service  │
+             └─────────────┘   └──────┬──────┘
+                                      │
+                              ┌───────┴────────┐
+                              │                │
+                              ▼                ▼
+                           Whisper         Gemini AI
