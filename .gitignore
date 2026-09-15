@@ -1,0 +1,46 @@
+# Node
+node_modules/
+dist/
+.vite/
+*.log
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.timestamp-*.mjs
+
+# Python models / large files
+*.pt
+*.pth
+*.bin
+*.onnx
+
+# Laravel
+server/storage/logs/
+server/storage/framework/cache/
+server/storage/framework/sessions/
+server/storage/framework/views/
+
+# Local databases
+*.sqlite
+*.sqlite3

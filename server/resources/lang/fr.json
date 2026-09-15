@@ -1,0 +1,16 @@
+{
+    "error": "Une erreur est survenue.",
+    "added": "Ajout effectué avec succès.",
+    "deleted": "Suppression effectuée avec succès.",
+    "updated": "Modification effectuée avec succès.",
+    "User id is required": "L'identifiant de l'utilisateur est requis",
+    "Invalid user id": "Identifiant utilisateur invalide",
+    "User not found": "Utilisateur non trouvé",
+    "Impossible to delete the owner.": "Impossible de supprimer le propriétaire.",
+    "Impossible to modify the owner.": "Impossible de modifier le propriétaire.",
+    "Invalid credentials": "Mot de passe incorrect",
+    "block": "Le compte a été bloqué. Il va être débloqué dans 15 minutes.",
+    "block_unlimited": "Votre compte a été bloqué. Veuillez contacter le support pour résoudre le problème.",
+    "session_expired": "Session expirée en raison d'inactivité.",
+    "no_permission": "Vous n'avez pas la permission d'effectuer cette action."
+}

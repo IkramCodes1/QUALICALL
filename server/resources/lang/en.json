@@ -1,0 +1,16 @@
+{
+    "error": "An error occurred.",
+    "added": "Successfully added.",
+    "deleted": "Successfully deleted.",
+    "updated": "Successfully updated.",
+    "User id is required": "User id is required",
+    "Invalid user id": "Invalid user id",
+    "User not found": "User not found",
+    "Impossible to delete the owner.": "Impossible to delete the owner.",
+    "Impossible to modify the owner.": "Impossible to modify the owner.",
+    "Invalid credentials": "Incorrect password",
+    "block": "The account has been blocked. It will be unblocked in 15 minutes.",
+    "block_unlimited": "Your account has been blocked. Please contact the support to resolve the problem.",
+    "session_expired": "Session expired due to inactivity.",
+    "no_permission": "You do not have permission to perform this action."
+}
